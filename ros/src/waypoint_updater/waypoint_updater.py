@@ -39,9 +39,6 @@ class WaypointUpdater(object):
         # commented out for debugging purpose
         self.final_waypoints_pub = rospy.Publisher('final_waypoints', Lane, queue_size=1)
 
-        # test topic for debugging
-        self.pub = rospy.Publisher('test_topic', Lane, queue_size=1)
-
         # TODO: Add other member variables you need below
         self.pose = None
         self.base_waypoints = None
@@ -55,16 +52,8 @@ class WaypointUpdater(object):
         rate = rospy.Rate(50)
 
         while not rospy.is_shutdown():
-            # if pose (from simulator) and waypoints are received
-
-            # TEST
+            # if pose (from simulator) and waypoints (from waypoint_loader) are received
             if self.pose and self.base_waypoints:
-                #print ("test")
-                #test_lane = Lane()
-                #test_lane.waypoints = self.base_waypoints.waypoints[0]
-                #self.pub.publish(test_lane)
-
-            #if self.pose and self.base_waypoints:
                 # get list of closest waypoints
                 closest_waypoint_idx = self.get_closest_waypoint_id()
                 # publish list of closest waypoints ahead of vehicle
